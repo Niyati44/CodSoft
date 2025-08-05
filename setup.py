@@ -75,7 +75,7 @@ def check_system_dependencies():
         print("  Ubuntu/Debian: sudo apt-get install tesseract-ocr tesseract-ocr-eng")
         print("  macOS: brew install tesseract")
         print("  Windows: Download from https://github.com/UB-Mannheim/tesseract/wiki")
-        print("\nNote: EasyOCR will be used as fallback if available")
+        print("\nNote: PaddleOCR will be used as fallback if available")
     
     return tesseract_available
 

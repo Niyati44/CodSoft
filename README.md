@@ -4,7 +4,7 @@ An AI-powered tool that automatically generates engaging Instagram captions from
 
 ## Features
 
-- **Advanced OCR Processing**: Supports both Tesseract and EasyOCR for robust text extraction
+- **Advanced OCR Processing**: Supports both Tesseract and PaddleOCR for robust text extraction
 - **AI-Powered Caption Generation**: Uses Mistral 7B model to create engaging, contextual captions
 - **Smart Hashtag Management**: Automatically limits hashtags to 5-7 relevant tags
 - **High-Confidence Text Filtering**: Only uses text with confidence scores above 90%
@@ -125,11 +125,11 @@ instagram-caption-generator/
 You can modify OCR behavior in `ocr.py`:
 
 ```python
-# Prefer EasyOCR over Tesseract
-processor = OCRProcessor(prefer_easyocr=True)
+# Prefer PaddleOCR over Tesseract
+processor = OCRProcessor(prefer_paddleocr=True)
 
 # Or prefer Tesseract
-processor = OCRProcessor(prefer_easyocr=False)
+processor = OCRProcessor(prefer_paddleocr=False)
 ```
 
 ### Caption Generation Settings
@@ -160,7 +160,7 @@ model_params = {
    - Check the file name matches exactly: `mistral-7b-instruct-v0.2.Q4_K_M.gguf`
 
 2. **"No OCR library available"**
-   - Install either `pytesseract` or `easyocr`
+   - Install either `pytesseract` or `paddleocr`
    - For Tesseract, also install system dependencies
 
 3. **"No text detected in image"**
@@ -181,10 +181,21 @@ Enable debug logging by modifying the logging level:
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 ```
 
+## Why PaddleOCR?
+
+PaddleOCR was chosen as the primary OCR engine for several reasons:
+
+1. **Superior Accuracy**: Excellent performance on various text layouts, fonts, and orientations
+2. **Multi-language Support**: Built-in support for 80+ languages including English
+3. **Robust Detection**: Handles rotated, curved, and stylized text better than traditional OCR
+4. **No External Dependencies**: Self-contained solution that doesn't require system-level installations
+5. **Active Development**: Regularly updated with improvements and new features
+6. **Flyer-Optimized**: Particularly good at handling the varied text styles common in flyers and promotional materials
+
 ## Performance Tips
 
 1. **OCR Performance**:
-   - EasyOCR generally provides better accuracy for complex layouts
+   - PaddleOCR generally provides excellent accuracy for various text layouts and languages
    - Tesseract is faster but may struggle with decorative fonts
    - Higher resolution images generally yield better OCR results
 
@@ -212,6 +223,6 @@ This project is open source. Please ensure you comply with the licenses of all d
 ## Acknowledgments
 
 - **Mistral AI** for the language model
-- **Tesseract** and **EasyOCR** teams for OCR capabilities
+- **Tesseract** and **PaddleOCR** teams for OCR capabilities
 - **llama-cpp-python** for efficient model inference
 
